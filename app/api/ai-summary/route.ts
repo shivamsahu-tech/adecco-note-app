@@ -3,14 +3,16 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request){
     try {
-        const {title, text} = await req.json();
+        const {title, description} = await req.json();
 
         const response = await getChatResponse(
             `Hey this is the user note, that have title and the text, and now you have to summarize the user text and reduce it by 30%  
+
+            NOTE: always return only descrption only in string form, nothing else, just updated description.
             
             Title: ${title}
 
-            Text: ${text}
+            Text: ${description}
             
             `
         )
