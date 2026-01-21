@@ -9,11 +9,17 @@ export async function POST(req: NextRequest) {
     await connectDB();
     const { email, password } = await req.json();
 
-    const user = await User.findOne({ email });
-    if (!user) return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
+    const user = await User.findOne({ 
+      email
+     });
+
+    if (!user) 
+      return NextResponse.json({ error: "User Didn't Exsit" }, { status: 401 });
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
+
+    if (!isMatch) 
+      return NextResponse.json({ error: "Invalid credentials" }, { status: 401 });
 
     const token = jwt.sign(
       { userId: user._id, email: user.email },
@@ -25,9 +31,6 @@ export async function POST(req: NextRequest) {
     
     response.cookies.set("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      maxAge: 86400, 
-      path: "/",
     });
 
     return response;

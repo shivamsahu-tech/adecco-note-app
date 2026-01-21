@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { connectDB } from "@/lib/db";
 import Note from "@/models/Note";
 
-// GET: Retrieve all notes
 export async function GET() {
   await connectDB();
   const notes = await Note.find({});
@@ -12,6 +11,7 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   try {
     await connectDB();
+    
     const { id, title, content } = await req.json();
 
     const note = await Note.findOneAndUpdate(
