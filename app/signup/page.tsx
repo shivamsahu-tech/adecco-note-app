@@ -7,7 +7,7 @@ export default function Signup(){
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
 
-    const handleSubmit = async () => {
+const handleSubmit = async () => {
 
         const body = {
             name,
@@ -23,9 +23,16 @@ export default function Signup(){
 
             const data = await response.json();
 
+            if(!response.ok){
+                alert('something went wrong')
+                return;
+            }
+
+            alert("User Signup  successfully")
 
         } catch (error) {
-            
+            alert('something went wrong')
+            return;
         }
     }
 

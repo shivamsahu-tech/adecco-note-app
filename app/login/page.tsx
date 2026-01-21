@@ -13,19 +13,25 @@ export default function Login(){
             password,
         }
 
-        // try {
-        //     const response = await fetch("http://localhost:3000/api/signup", {
-        //         method: "POST",
-        //         body: JSON.stringify(body)
-        //     })
+        try {
+            const response = await fetch("http://localhost:3000/api/login", {
+                method: "POST",
+                body: JSON.stringify(body)
+            })
 
-        //     const data = await response.json();
+            const data = await response.json();
 
+            if(!response.ok){
+                alert('something went wrong')
+                return;
+            }
 
-        // } catch (error) {
-            
-        // }
-        console.log(body);
+            alert("User login successfully")
+
+        } catch (error) {
+            alert('something went wrong')
+            return;
+        }
     }
 
     return (
