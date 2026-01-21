@@ -5,7 +5,7 @@ const HF_TOKEN = process.env.HF_TOKEN;
 
 const  hf = new HfInference(HF_TOKEN);
 
-async function getChatResponse(message : string){
+ export async function getChatResponse(message : string){
     try {
         const response = await hf.chatCompletion({
             model: 'Qwen/Qwen2.5-72B-Instruct',
